@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"net"
+	"encoding/binary"
 	types "github.com/0187773933/MastersClosetRemoteDB/v1/types"
 )
 
@@ -31,4 +32,10 @@ func GetLocalIPAddresses() ( ip_addresses []string ) {
 		}
 	}
 	return
+}
+
+func ItoB(v uint64) []byte {
+    b := make([]byte, 8)
+    binary.BigEndian.PutUint64(b, v)
+    return b
 }

@@ -7,6 +7,7 @@ type ConfigFile struct {
 	ServerCookieSecret string `json:"server_cookie_secret"`
 	ServerCookieAdminSecretMessage string `json:"server_cookie_admin_secret_message"`
 	ServerCookieSecretMessage string `json:"server_cookie_secret_message"`
+	ServerHeaderPrefix string `json:"server_header_prefix"`
 	ServerLiveUrl string `json:"server_live_url"`
 	LocalHostUrl string `json:"local_host_url"`
 	AdminUsername string `json:"admin_username"`
@@ -15,4 +16,5 @@ type ConfigFile struct {
 	BoltDBPath string `json:"bolt_db_path"`
 	BoltDBEncryptionKey string `json:"bolt_db_encryption_key"`
 	BoltDBEncryptionKeyClients string `json:"bolt_db_encryption_key_clients"`
+	MaxTrackedChanges int `"json:"max_tracked_changes"`
 }
