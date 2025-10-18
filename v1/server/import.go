@@ -41,7 +41,7 @@ func ( s *Server ) ImportUser( context *fiber.Ctx ) ( error ) {
 	})
 	if db_result != nil { fmt.Println( db_result ); return context.Status( 500 ).JSON( fiber.Map{ "result": result } ) }
 	result = true
-	return context.JSON( fiber.Map{
+	return context.Status( 200 ).JSON( fiber.Map{
 		"result": result ,
 		"sequence": sequence ,
 	})
