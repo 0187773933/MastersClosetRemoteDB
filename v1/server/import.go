@@ -30,12 +30,12 @@ func ( s *Server ) ImportUser( context *fiber.Ctx ) ( error ) {
 		sequence = ulid.Make().String()
 		changed_bucket_store_result := changed_bucket.Put( []byte( sequence ) , []byte( uuid ) )
 		if changed_bucket_store_result != nil { fmt.Println( changed_bucket_store_result ); return changed_bucket_store_result }
-		if changed_bucket.Stats().KeyN > s.Config.MaxTrackedChanges {
-			c := changed_bucket.Cursor()
-			for k , _ := c.First(); k != nil && changed_bucket.Stats().KeyN > s.Config.MaxTrackedChanges; k , _ = c.Next() {
-				changed_bucket.Delete( k )
-			}
-		}
+		// if changed_bucket.Stats().KeyN > s.Config.MaxTrackedChanges {
+		// 	c := changed_bucket.Cursor()
+		// 	for k , _ := c.First(); k != nil && changed_bucket.Stats().KeyN > s.Config.MaxTrackedChanges; k , _ = c.Next() {
+		// 		changed_bucket.Delete( k )
+		// 	}
+		// }
 		fmt.Println( "ImportUser - tracking change for user:" , client_id , "::" , uuid , " with sequence:" , sequence )
 		return nil
 	})
