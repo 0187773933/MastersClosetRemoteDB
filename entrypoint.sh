@@ -9,6 +9,8 @@ HASH_FILE="/home/morphs/git.hash"
 GO_BIN="/usr/local/go/bin/go"
 # ==========================
 
+sudo chown -R morphs:morphs /home/morphs/SAVE_FILES
+
 REMOTE_HASH=$(${GO_BIN} run github.com/git-lfs/git-lfs@latest ls-remote ${REPO_URL} HEAD 2>/dev/null | awk '{print $1}')
 # fallback if git-lfs not installed
 if [ -z "$REMOTE_HASH" ]; then
