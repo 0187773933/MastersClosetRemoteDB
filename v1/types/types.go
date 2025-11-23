@@ -9,6 +9,7 @@ type ConfigFile struct {
 	ServerCookieSecretMessage string `json:"server_cookie_secret_message"`
 	ServerHeaderPrefix string `json:"server_header_prefix"`
 	ServerLiveUrl string `json:"server_live_url"`
+	MirrorToGlobal bool `json:"mirror_to_global"`
 	MirrorHostUrl string `json:"mirror_host_url"`
 	MirrorHostAPIKey string `json:"mirror_host_api_key"`
 	LocalHostUrl string `json:"local_host_url"`

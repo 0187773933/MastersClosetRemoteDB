@@ -46,15 +46,17 @@ func ( s *Server ) ImportUser( ctx *fiber.Ctx ) ( error ) {
 	})
 	if db_result != nil { fmt.Println( db_result ); return ctx.Status( 500 ).JSON( fiber.Map{ "result": result } ) }
 	result = true
-	go func() {
-		timer := time.AfterFunc( 30*time.Second , func() {
-			fmt.Println( "MirrorToGlobal still running after 30s — giving up" )
-		})
-		defer timer.Stop()
-		mtgr := s.MirrorToGlobal( uuid , &body )
-		fmt.Println( "MirrorToGlobal result for user:" , uuid , "::" , mtgr )
-		timer.Stop()
-	}()
+	if s.Config.MirrorToGlobal == true {
+		go func() {
+			timer := time.AfterFunc( 30*time.Second , func() {
+				fmt.Println( "MirrorToGlobal still running after 30s — giving up" )
+			})
+			defer timer.Stop()
+			mtgr := s.MirrorToGlobal( uuid , &body )
+			fmt.Println( "MirrorToGlobal result for user:" , uuid , "::" , mtgr )
+			timer.Stop()
+		}()
+	}
 	return ctx.Status( 200 ).JSON( fiber.Map{
 		"result": result ,
 		"sequence": sequence ,
