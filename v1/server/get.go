@@ -17,7 +17,7 @@ func ( s *Server ) GetUser( ctx *fiber.Ctx ) ( error ) {
 	s.DB.View( func( tx *bolt.Tx ) error {
 		users_bucket := tx.Bucket( []byte( "users" ) )
 		user_encrypted_bytes := users_bucket.Get( []byte( uuid ) )
-		if len( user_encrypted_bytes ) < 1 {
+		if user_encrypted_bytes == nil || len( user_encrypted_bytes ) < 1 {
 			return ctx.Status( 200 ).JSON( fiber.Map{
 				"user": viewed_user ,
 			})

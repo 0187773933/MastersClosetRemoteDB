@@ -24,6 +24,7 @@ func ( s *Server ) ImportUser( ctx *fiber.Ctx ) ( error ) {
 	body := ctx.Body()
 	if len( body ) == 0 { fmt.Println( "empty body" ); return ctx.JSON( fiber.Map{ "result": result , } ) }
 	sequence := ""
+	fmt.Println( "ImportUser()" , uuid , len( body ) )
 	db_result := s.DB.Update( func( tx *bolt.Tx ) error {
 		users_bucket , users_bucket_err := tx.CreateBucketIfNotExists( []byte( "users" ) )
 		if users_bucket_err != nil { fmt.Println( users_bucket_err ); return users_bucket_err }
