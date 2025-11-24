@@ -93,6 +93,7 @@ func ( s *Server ) SetupRoutes() {
 	s.FiberApp.Post( "/import" , PublicLimiter , s.ImportUser )
 	s.FiberApp.Get( "/changed" , PublicLimiter , s.GetChangedUsersList )
 	s.FiberApp.Get( "/download" , PublicLimiter , s.DownloadUser )
+	s.FiberApp.Get( "/get" , PublicLimiter , s.GetUser )
 }
 
 func ( s *Server ) Start() {
